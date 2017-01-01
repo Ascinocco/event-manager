@@ -1,0 +1,12 @@
+.idea/encodings.xml
+.idea/event-manager.iml
+.idea/modules.xml
+.idea/workspace.xml
+/mysql/*
+/phpmyadmin/*
+/event-manager/vendor
+/event-manager/node_modules
+/event-manager/public/storage
+/event-manager/Homestead.yaml
+/event-manager/Homestead.json
+/event-manager/.env
