@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use \App\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -29,11 +30,17 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:50|',
+            'name' => 'required|max:50',
             'email' => 'required|email'
         ]);
 
-        $data = $request->all();
-        return $data;
+        $user = Auth::user();
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+
+        $user->save();
+
+        return ['user' => $user];
     }
 }
