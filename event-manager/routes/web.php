@@ -50,7 +50,7 @@ Route::group(['prefix' => 'user'], function () {
     Route::put('/settings', 'UserController@update');
 
     // delete account
-    Route::delete('/delete');
+    Route::delete('/delete', 'UserController@delete');
 });
 
 /**

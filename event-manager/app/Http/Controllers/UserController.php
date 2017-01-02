@@ -43,4 +43,9 @@ class UserController extends Controller
 
         return ['user' => $user];
     }
+
+    public function delete()
+    {
+
+    }
 }
