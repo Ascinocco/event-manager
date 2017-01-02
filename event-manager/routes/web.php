@@ -18,3 +18,18 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+/**
+ * Admin Routes
+ */
+
+Route::group(['middleware' => ['CheckAdmin']], function (){
+    Route::get('/testAdmin', 'HomeController@adminAction');
+});
+
+
+/**
+ * Authorization Failure Route
+ */
+
+Route::get('/notAuthorized', ['as' => 'notAuthorized', 'uses' => 'HomeController@notAuthorized']);

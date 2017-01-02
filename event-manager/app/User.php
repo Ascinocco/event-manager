@@ -31,7 +31,7 @@ class User extends Authenticatable
 
     /**
      * Default attributes for values
-     * 
+     *
      * @var array
      */
     protected $attributes = [

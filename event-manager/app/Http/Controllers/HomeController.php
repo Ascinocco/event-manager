@@ -25,4 +25,14 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function adminAction()
+    {
+        return '<h1>Authorized!</h1>';
+    }
+
+    public function notAuthorized()
+    {
+        return view('errors/notAuthorized');
+    }
 }
