@@ -9,13 +9,15 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    const IS_ADMIN = false;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'isAdmin'
     ];
 
     /**
@@ -25,5 +27,14 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password', 'remember_token',
+    ];
+
+    /**
+     * Default attributes for values
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'isAdmin' => self::IS_ADMIN,
     ];
 }
