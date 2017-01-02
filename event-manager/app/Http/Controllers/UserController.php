@@ -27,6 +27,12 @@ class UserController extends Controller
         return view('settings.user.index', ['user' => $user]);
     }
 
+    /**
+     * Updates user account information
+     *
+     * @param Request $request
+     * @return array - user object
+     */
     public function update(Request $request)
     {
         $this->validate($request, [
@@ -46,6 +52,10 @@ class UserController extends Controller
 
     public function delete()
     {
+//        $user = Auth::user();
+//        $user = User::find($user->id);
+//        $user->delete();
 
+        return "true";
     }
 }
