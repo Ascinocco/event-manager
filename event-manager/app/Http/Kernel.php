@@ -43,6 +43,8 @@ class Kernel extends HttpKernel
      *
      * These middleware may be assigned to groups or used individually.
      *
+     * Added additional middleware to check if user is an administrator
+     *
      * @var array
      */
     protected $routeMiddleware = [
