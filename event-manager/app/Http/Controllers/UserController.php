@@ -28,6 +28,11 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required|max:50|',
+            'email' => 'required|email'
+        ]);
+
         $data = $request->all();
         return $data;
     }
