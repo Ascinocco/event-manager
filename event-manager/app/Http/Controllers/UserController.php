@@ -64,12 +64,13 @@ class UserController extends Controller
 
             // need the user to check if old password is the password in the db
             $user = Auth::user();
+            $oldPassword = $request->input('oldPassword');
 
             //check the password
-            if (!Hash::check($newPassword, $user->password)) {
+            if (!Hash::check($oldPassword, $user->password)) {
                 return [
                     'error' => true,
-                    'msg' => 'Your old password does not match the password we have on file for you.'
+                    'msg' => 'Your old password does not match the password we have on file for you.',
                 ];
             }
 
