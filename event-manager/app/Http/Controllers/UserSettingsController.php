@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use \App\User;
 
-class UserController extends Controller
+class UserSettingsController extends Controller
 {
     /**
      * New controller instance with authentication checks

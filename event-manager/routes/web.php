@@ -46,11 +46,11 @@ Route::group(['middleware' => ['CheckAdmin']], function (){
  */
 Route::group(['prefix' => 'user'], function () {
     // view and update settings
-    Route::get('/settings', 'UserController@index');
-    Route::put('/settings', 'UserController@update');
+    Route::get('/settings', ['as' => 'settings', 'uses' => 'UserSettingsController@index']);
+    Route::put('/settings', ['as' => 'settings', 'uses' => 'UserSettingsController@update']);
 
     // delete account
-    Route::delete('/delete', ['as' => 'delete', 'uses' => 'UserController@delete']);
+    Route::delete('/delete', ['as' => 'delete', 'uses' => 'UserSettingsController@delete']);
 });
 
 /**
