@@ -2,10 +2,13 @@
     <body>
         <h1>User Dashboard!!!</h1>
 
-        <button type="button" id="createEventButton" name="createEvent">Create Event</button>
+        <button type="button" id="createEventShowFormButton" name="createEvent">Create Event</button>
 
         <div id="eventsOwned">
             <h3>Events Owned</h3>
+            <div id="ownedEvents">
+
+            </div>
         </div>
 
         <div id="eventsAttending">
@@ -19,41 +22,98 @@
                 <div id="createEventTitle">
                     <label for="createEventTitle">Title:</label>
                     <br>
-                    <input type="text" id="createEventTitle" name="createEventTitle" required="required">
+                    <input type="text" id="createEventTitle" name="title" required="required">
                 </div>
                 <div id="createEventDescription">
                     <label for="createEventDescription">Description</label>
                     <br>
-                    <input type="text" id="createEventDescription" name="createEventDescription" required="required">
+                    <input type="text" id="createEventDescription" name="description" required="required">
                 </div>
                 <div id="location">
                     <label for="createEventLocation">Location:</label>
                     <br>
-                    <input type="text" id="createEventLocation" name="createEventLocation" required="required">
+                    <input type="text" id="createEventLocation" name="location" required="required">
                 </div>
                 <div id="createEventAttire">
                     <label for="createEventAttire">Attire:</label>
                     <br>
-                    <input type="text" id="createEventAttire" name="createEventAttire" required="required">
+                    <input type="text" id="createEventAttire" name="attire" required="required">
                 </div>
                 <div id="createEventDate">
                     <label for="createEventDate">Date:</label>
                     <br>
-                    <input type="text" id="createEventDate" name="createEventDate" required="required">
+                    <input type="datetime" id="createEventDate" name="date" required="required">
                 </div>
 
-                <button type="button" id="submitCreateEventButton" name="submitCreateEventButton">Create Event</button>
+                <button type="button" id="createEventSubmitButton" name="submitCreateEventButton">Create Event</button>
             </form>
         </div>
 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
-                // on page ready hide all forms
+                /**
+                 * Hide forms and other functionality
+                 */
+                // hide create event form
                 $("div#createEventForm").hide();
+                /** Hide forms and other functionality END */
 
-                // event listeners
-                $("button#createEventButton").on("click", function (event) {
+                /**
+                 * Load dashboard data
+                 */
+                // load owned events
+                (function () {
+                    // setup headers
+                    $.ajaxSetup({
+                        header: "{{ csrf_token() }}"
+                    });
+
+                    // get users owned events
+                    $.ajax({
+                        type: "GET",
+                        url: "/user/getOwnedEvents",
+                        dataType: "JSON",
+                        success: function (data) {
+                            console.log('success!');
+
+                            for (var i = 0; i < data.length; i++) {
+                                for (eventData in data[i]) {
+                                    if(data[i].hasOwnProperty(eventData)){
+                                        $("div#ownedEvents").append(eventData + ": " + data[i][eventData]);
+                                        $("div#ownedEvents").append("<br>");
+                                    }
+                                }
+
+                                $("div#ownedEvents").append("<hr>");
+                            }
+
+                        },
+                        error: function (data) {
+                            console.log('error!');
+                            console.log(data);
+                        }
+                    });
+                })();
+
+                // load attending events
+
+                /** Load Dashboard data END */
+
+                /**
+                 * Event Listeners
+                 */
+                // show create event form
+                $("button#createEventShowFormButton").on("click", function (event) {
+                    // stop default actions
+                    event.preventDefault();
+
+                    // show the form
+                    $("div#createEventForm").show();
+                });
+
+                // submit create event form
+                $("button#createEventSubmitButton").on("click", function (event) {
                     // stop default actions
                     event.preventDefault();
 
@@ -78,6 +138,7 @@
                         }
                     });
                 });
+                /** Event Listeners END */
 
             });
         </script>
