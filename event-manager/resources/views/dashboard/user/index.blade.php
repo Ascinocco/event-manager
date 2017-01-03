@@ -76,8 +76,8 @@
                         dataType: "JSON",
                         success: function (data) {
                             console.log('success!');
-
                             for (var i = 0; i < data.length; i++) {
+                                $("div#ownedEvents").append('<div id="ownedEvent" data-owned-event-id="' + data[i][id] + '"');
                                 for (eventData in data[i]) {
                                     if(data[i].hasOwnProperty(eventData)){
                                         $("div#ownedEvents").append(eventData + ": " + data[i][eventData]);
@@ -85,6 +85,9 @@
                                     }
                                 }
 
+                                $("div#ownedEvents").append('<button type="button" id="editEventButton" data-owned-event-id="' + data[i]['id'] + '">Edit</button>');
+                                $("div#ownedEvents").append('<button type="button" id="deleteEvent" data-owned-event-id="' + data[i]['id'] + '">Delete</button>');
+                                $("div#ownedEvents").append('<button type="button" id="invitePeopleToEvent" data-event-id="' + data[i]['id'] + '">Invite People</button>');
                                 $("div#ownedEvents").append("<hr>");
                             }
 
@@ -96,7 +99,7 @@
                     });
                 })();
 
-                // load attending events
+                // TODO: load attending events
 
                 /** Load Dashboard data END */
 
@@ -138,6 +141,10 @@
                         }
                     });
                 });
+
+                /** -------------------- Button Listeners --------------------------- */
+
+
                 /** Event Listeners END */
 
             });
