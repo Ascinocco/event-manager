@@ -16,7 +16,23 @@
                 <input type="email" id="email" name="email" value="{{ $user->email }}">
             </div>
 
-            {{--<div id="checkToken"></div>--}}
+            <div id="oldPassword">
+                <label for="oldPassword">Old Password:</label>
+                <br>
+                <input type="password" id="oldPassword" name="oldPassword">
+            </div>
+
+            <div id="newPassword">
+                <label for="newPassword">New Password:</label>
+                <br>
+                <input type="password" id="newPassword" name="newPassword">
+            </div>
+
+            <div id="confirmPassword">
+                <label for="confirmPassword">Confirm Password:</label>
+                <br>
+                <input type="password" id="confirmPassword" name="confirmPassword">
+            </div>
 
             <button id="userSettingsForm" type="button">Submit</button>
         </form>

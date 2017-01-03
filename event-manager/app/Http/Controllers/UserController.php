@@ -29,16 +29,27 @@ class UserController extends Controller
 
     /**
      * Updates user account information
+     * TODO: Password reset
+     * TODO: profile picture upload and change
+     *
      *
      * @param Request $request
      * @return array - user object
      */
     public function update(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|max:50',
-            'email' => 'required|email'
-        ]);
+        if($request->input('oldPassword')){
+            $this->validate($request, [
+                'name' => 'required|max:50',
+                'email' => 'required|email',
+                'oldPassword' => 'password',
+            ]);
+        } else {
+            $this->validate($request, [
+                'name' => 'required|max:50',
+                'email' => 'required|email',
+            ]);
+        }
 
         $user = Auth::user();
 
@@ -50,6 +61,12 @@ class UserController extends Controller
         return ['user' => $user];
     }
 
+    /**
+     * Delete's logged in user
+     * TODO: proper return messages and status codes
+     *
+     * @return array - success or failure messages
+     */
     public function delete()
     {
         $user = Auth::user();
