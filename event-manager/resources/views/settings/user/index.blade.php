@@ -20,8 +20,8 @@
 
             <button id="userSettingsForm" type="button">Submit</button>
         </form>
-        <form id="userDeleteForm">
-            {{--<input type="hidden" name="_method" value="DELETE">--}}
+        <form id="deleteAccountForm">
+            <input type="hidden" name="_method" value="DELETE">
             <input type="hidden" id="deleteToken" name="_token" value="{{ csrf_token() }}">
             <button id="deleteAccountForm" type="button">Delete Account</button>
         </form>

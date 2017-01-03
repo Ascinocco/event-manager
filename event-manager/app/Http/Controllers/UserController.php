@@ -52,10 +52,11 @@ class UserController extends Controller
 
     public function delete()
     {
-//        $user = Auth::user();
-//        $user = User::find($user->id);
-//        $user->delete();
-
-        return "true";
+        $user = Auth::user();
+        if ($user->delete()) {
+            return ["success" => "true"];
+        } else {
+            return ["error" => "true", "msg" => "Could not delete account"];
+        }
     }
 }
