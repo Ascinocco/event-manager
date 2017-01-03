@@ -25,4 +25,15 @@ class UserDashboardController extends Controller
         // send user events to view
         return view('dashboard.user.index');
     }
+
+    /**
+     * Create Events
+     */
+    public function createEvent()
+    {
+        return [
+            "success" => true,
+            "msg" => "Testing, reporting success for now"
+        ];
+    }
 }
