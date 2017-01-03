@@ -13,6 +13,7 @@ return [
     |
     */
 
+    'name'                 => 'The :attribute can only contain letters and spaces',
     'password'             => 'The :attribute must contain at least 8 characters, 1 uppercase, 1 lowercase and 1 number.',
     'accepted'             => 'The :attribute must be accepted.',
     'active_url'           => 'The :attribute is not a valid URL.',

@@ -39,6 +39,14 @@ class AppServiceProvider extends ServiceProvider
                 return true;
             }
         });
+
+        /**
+         * Allows for alpha and space characters as well as unicode characters
+         * for names with special characters
+         */
+        Validator::extend('name', function ($attribute, $value, $parameters, $validator) {
+            return preg_match('/^[\pL\s]+$/u', $value);
+        });
     }
 
     /**

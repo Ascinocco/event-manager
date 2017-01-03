@@ -7,13 +7,13 @@
             <div id="name">
                 <label for="name">Name:</label>
                 <br>
-                <input type="text" id="name" name="name" value="{{ $user->name }}">
+                <input type="text" id="name" name="name" value="{{ $user->name }}" required="required">
             </div>
 
             <div id="email">
                 <label for="email">Email:</label>
                 <br>
-                <input type="email" id="email" name="email" value="{{ $user->email }}">
+                <input type="email" id="email" name="email" value="{{ $user->email }}" required="required">
             </div>
 
             <div id="oldPassword">

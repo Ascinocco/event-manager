@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use \App\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use \App\User;
 
 class UserController extends Controller
 {
@@ -38,27 +39,86 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
+        // check if we have passwords or not
         if($request->input('oldPassword')){
+
+            // validate user data
             $this->validate($request, [
-                'name' => 'required|max:50',
+                'name' => 'name|required|max:50',
                 'email' => 'required|email',
-                'oldPassword' => 'password',
+                'oldPassword' => 'password|required',
+                'newPassword' => 'password|required',
+                'confirmPassword' => 'password|required',
             ]);
-        } else {
-            $this->validate($request, [
-                'name' => 'required|max:50',
-                'email' => 'required|email',
-            ]);
+
+            // check if password match
+            $newPassword = $request->input('newPassword');
+            $confirmPassword = $request->input('confirmPassword');
+
+            if ($newPassword !== $confirmPassword) {
+                return [
+                    'error' => true,
+                    'msg' => 'New Password and Confirmation password do not match',
+                ];
+            }
+
+            // need the user to check if old password is the password in the db
+            $user = Auth::user();
+
+            //check the password
+            if (!Hash::check($newPassword, $user->password)) {
+                return [
+                    'error' => true,
+                    'msg' => 'Your old password does not match the password we have on file for you.'
+                ];
+            }
+
+            // update the user
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $user->password = Hash::make($newPassword);
+
+            if ($user->save()) {
+                return [
+                    'success' => true,
+                    'msg' => 'Account Information Updated!',
+                    'user' => $user,
+                ];
+            } else {
+                return [
+                    'error' => true,
+                    'msg' => 'An error occurred updating your account. Please try again.',
+                    'user' => $user,
+                ];
+            }
+
+
         }
 
-        $user = Auth::user();
+        // if we don't have a password validate other fields
+        $this->validate($request, [
+            'name' => 'required|max:50',
+            'email' => 'required|email',
+        ]);
 
+        // update user
+        $user = Auth::user();
         $user->name = $request->input('name');
         $user->email = $request->input('email');
 
-        $user->save();
-
-        return ['user' => $user];
+        if ($user->save()) {
+            return [
+                'success' => true,
+                'msg' => 'Account Information Updated!',
+                'user' => $user,
+            ];
+        } else {
+            return [
+                'error' => true,
+                'msg' => 'An error occurred updating your account. Please try again.',
+                'user' => $user,
+            ];
+        }
     }
 
     /**
