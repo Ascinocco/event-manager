@@ -37,4 +37,12 @@ class User extends Authenticatable
     protected $attributes = [
         'isAdmin' => self::IS_ADMIN,
     ];
+
+    /**
+     * get events associated with user
+     */
+    public function events()
+    {
+        return $this->belongsToMany('App\Event');
+    }
 }
