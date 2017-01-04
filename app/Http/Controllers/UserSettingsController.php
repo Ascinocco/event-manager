@@ -24,7 +24,7 @@ class UserSettingsController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('settings.user.vue', ['user' => $user]);
+        return view('settings.user.index', ['user' => $user]);
     }
 
     public function getUser()
