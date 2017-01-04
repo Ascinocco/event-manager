@@ -61,6 +61,11 @@ Route::group(['prefix' => 'user'], function () {
      */
     Route::get('/dashboard', ['as' => 'dashboard', 'uses' => 'UserDashboardController@index']);
 
+    Route::get('/getOwnedEvents', ['as' => 'getOwnedEvents', 'uses' => 'UserDashboardController@getOwnedEvents']);
+
+    Route::post('createEvent', ['as' => 'createEvent', 'uses' => 'UserDashboardController@createEvent']);
+
+
 });
 
 /**
