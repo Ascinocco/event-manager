@@ -37,6 +37,9 @@
                             <label for="confirmPassword">Confirm New Password</label>
                             <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" v-model="editUserForm.confirmPassword">
                         </div>
+
+                        <button type="button" class="btn btn-success" v-on:click="updateUser(editUserForm)">Update</button>
+
                     </form>
                 </div>
             </div>
@@ -51,7 +54,6 @@
 
         data() {
             return {
-                edit: false,
                 editUserForm: {
                     name: '',
                     email: '',
@@ -69,6 +71,20 @@
                     this.editUserForm.name = response.data.name;
                     this.editUserForm.email = response.data.email;
                 });
+            },
+
+            updateUser(user) {
+                this.$http.put('/user/settings', user).then(response => {
+                    console.log('i think this is success??');
+                    console.log(response.data);
+                }, (response) => {
+                    console.log('error???');
+                    console.log(response.data);
+                });
+            },
+
+            deleteUser() {
+
             }
         },
 
