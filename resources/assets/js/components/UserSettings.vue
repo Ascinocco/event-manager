@@ -39,6 +39,7 @@
                         </div>
 
                         <button type="button" class="btn btn-success" v-on:click="updateUser(editUserForm)">Update</button>
+                        <button type="button" class="btn btn-danger" v-on:click="deleteUser()">Delete Account</button>
 
                     </form>
                 </div>
@@ -84,7 +85,14 @@
             },
 
             deleteUser() {
-
+                this.$http.delete('/user/delete').then(response => {
+                    console.log('Account Deleted!');
+                    console.log(response.data);
+                    window.location.replace("http://event-manager.app");
+                }, (response) => {
+                    console.log('Account Not Deleted...');
+                    console.log(response.data);
+                });
             }
         },
 
