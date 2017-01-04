@@ -1,7 +1,4 @@
-.idea/encodings.xml
-.idea/event-manager.iml
-.idea/modules.xml
-.idea/workspace.xml
+.idea/*
 vendor
 node_modules
 .env
