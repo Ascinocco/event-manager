@@ -52,6 +52,7 @@ Route::group(['prefix' => 'user'], function () {
     // view and update settings
     Route::get('/settings', ['as' => 'settings', 'uses' => 'UserSettingsController@index']);
     Route::put('/settings', ['as' => 'settings', 'uses' => 'UserSettingsController@update']);
+    Route::get('/getUser', ['as' => 'getUser', 'uses' => 'UserSettingsController@getUser']);
 
     // delete account
     Route::delete('/delete', ['as' => 'delete', 'uses' => 'UserSettingsController@delete']);
