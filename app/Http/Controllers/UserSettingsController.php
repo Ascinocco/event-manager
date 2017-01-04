@@ -27,6 +27,11 @@ class UserSettingsController extends Controller
         return view('settings.user.index', ['user' => $user]);
     }
 
+    public function getUser()
+    {
+        return response()->json(Auth::user());
+    }
+
     /**
      * Updates user account information
      * TODO: Password reset

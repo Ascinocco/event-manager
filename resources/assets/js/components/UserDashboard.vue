@@ -3,6 +3,7 @@
         <h1>User Dashboard</h1>
         <p>Eat shit vue</p>
         blah
+        moose tits
     </div>
 </template>
 
