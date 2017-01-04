@@ -13,7 +13,6 @@ require('./bootstrap');
  * the application, or feel free to tweak this setup for your needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
 Vue.component('user-dashboard', require('./components/UserDashboard.vue'));
 Vue.component('user-settings', require('./components/UserSettings.vue'));
 
