@@ -3,9 +3,7 @@
 /**
  * Home page
  */
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', ['as' => '/', 'uses' => 'HomeController@index']);
 
 /**
  * Authentication Routes
@@ -18,16 +16,16 @@ Auth::routes();
  * Authorization Failure Route
  */
 
-Route::get('/notAuthorized', ['as' => 'notAuthorized', 'uses' => 'HomeController@notAuthorized']);
+Route::get('/notAuthorized', ['as' => 'notAuthorized', 'uses' => 'AuthorizationController@notAuthorized']);
 
 /**
  * Admin Dashboard
  * List of users and events to manage
  */
-Route::group(['middleware' => ['CheckAdmin']], function (){
-    Route::get('/testAdmin', 'HomeController@adminAction');
+Route::group(['prefix' => 'admin'], function (){
+    Route::get('/testAdmin', 'AdminDashboardController@adminAction');
 
-    Route::get('/adminDashboard');
+    Route::get('/dashboard');
 
 
 });
@@ -67,17 +65,7 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('/getAttendingUsers', ['as' => 'getAttendingUsers', 'uses' => 'UserDashboardController@getAttendingUsers']);
 
     Route::post('/createEvent', ['as' => 'createEvent', 'uses' => 'UserDashboardController@createEvent']);
+    Route::put('/updateEvent', ['as' => 'updateEvent', 'uses' => 'UserDashboardController@updateEvent']);
     Route::delete('/deleteEvent/{id}', ['as' => 'deleteEvent', 'uses' => 'UserDashboardController@deleteEvent']);
 
 });
-
-/**
- * Event settings
- * Update: Event name, user invitations, date
- * Read: Event name, accepted/declined/pending invitations
- * Delete: Users from event, event itself
- */
-
-
-
-Route::get('/home', 'HomeController@index');

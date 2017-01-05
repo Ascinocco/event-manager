@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
-class HomeController extends Controller
+class AuthorizationController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -13,16 +14,11 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        //
+        $this->middleware('auth');
     }
 
-    /**
-     * Show the home page
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function notAuthorized()
     {
-        return view('welcome');
+        return 'not authorized!';
     }
 }

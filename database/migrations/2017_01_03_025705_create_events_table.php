@@ -19,7 +19,7 @@ class CreateEventsTable extends Migration
             $table->binary('description');
             $table->string('location', 255);
             $table->string('attire', 255);
-            $table->dateTime('date');
+            $table->date('date');
             $table->unsignedInteger('owner');
             $table->timestamps();
         });
