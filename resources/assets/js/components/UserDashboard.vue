@@ -1,9 +1,37 @@
 <template>
     <div>
-        <h1>Dashboard</h1>
+        <div id="userDashboard" class="container">
+            <div class="row">
+                <div class="text-center">
+                    <h3>Dashboard</h3>
+                </div>
+            </div>
+
+            <div class="row">
+                <br>
+                <div id="ownedEventsList" class="col-md-6">
+                    <div class="text-center">
+                        <h5>Events Owned | <a class="lara-anchor" v-on:click="createOwnedEvent()"><i class="fa fa-plus"></i></a></h5>
+                    </div>
+                </div>
+                <div id="attendingEventsList" class="col-md-6">
+                    <div class="text-center">
+                        <h5>Events Attending</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
+<style>
+    .lara-anchor {
+        color: #636b6f;
+    }
 
+    .lara-anchor:hover {
+        color: #A9A9A9;
+    }
+</style>
 <script>
     export default {
         data() {
@@ -64,13 +92,13 @@
                 });
             },
 
-            fetchAttendingUsers(event) {
-                this.$http.get('/user/getAttendingUsers', event).then(response => {
+            fetchUsersAttendingEvent(eventId) {
+                this.$http.post('/user/getAttendingUsers', eventId).then(response => {
                     console.log('success retrieving users attending event');
                     console.log(response);
 
-                    this.usersAttendingEvent.eventId = event.id;
-                    this.usersAttendingEvent.users = response.data.attendingUsers;
+                    this.usersAttendingEvent.eventId = eventId;
+                    this.usersAttendingEvent.users = response.data.usersAttendingEvent;
 
                 }, (response) => {
                     console.log('error retrieving users attending event');
@@ -87,6 +115,12 @@
 
             deleteOwnedEvent() {
 
+            },
+
+            createOwnedEvent() {
+                // logic to show event creation form here
+                // for now, just log that the button was clicked
+                console.log('create event anchor clicked!');
             },
 
             inviteUserToOwnedEvent() {

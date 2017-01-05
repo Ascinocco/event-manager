@@ -96,6 +96,14 @@ class UserDashboardController extends Controller
      */
     public function getAttendingUsers(Request $request)
     {
+        // get event id
+        $event_id = $request->input('eventId');
 
+        // get user ids assoc with the event
+        $user_ids = DB::table('event_user')->where('event_id', $event_id)->pluck('user_id')->toArray();
+        // get the users
+        $users = DB::table('users')->whereIn('id', $user_ids)->get(['id','name', 'email']);
+
+        return response()->json(["usersAttendingEvent" => $users]);
     }
 }
