@@ -22,7 +22,7 @@ class UserDashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard.user.vue');
+        return view('dashboard.user.index');
     }
 
     /**
