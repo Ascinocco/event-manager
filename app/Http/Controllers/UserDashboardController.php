@@ -106,4 +106,29 @@ class UserDashboardController extends Controller
 
         return response()->json(["usersAttendingEvent" => $users]);
     }
+
+    /**
+     * Delete event
+     */
+    public function deleteEvent($id)
+    {
+
+        $event = Event::find($id);
+
+        if ($event->delete()) {
+            return response()->json(
+                [
+                    "success" => true,
+                    "msg" => "Event Successfully deleted"
+                ]
+            );
+        } else {
+            return response()->json(
+                [
+                    "success" => false,
+                    "msg" => "Event Deletion Failed"
+                ]
+            );
+        }
+    }
 }

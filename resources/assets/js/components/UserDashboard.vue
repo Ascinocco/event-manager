@@ -252,8 +252,25 @@
             },
 
             deleteOwnedEvent(ownedEvent) {
-                console.log('delete owned event');
+                console.log('deleting owned event...');
                 console.log(ownedEvent.id);
+
+                this.$http.delete('/user/deleteEvent/' + ownedEvent.id).then(response => {
+                    console.log('Event Successfully Delete');
+                    console.log(response.data);
+
+                    // grab events again and refresh
+                    this.fetchOwnedEvents();
+                    this.fetchAttendingEvents();
+
+                }, (response) => {
+
+                    console.log('Error deleting event');
+                    console.log(response.data);
+
+                    this.ownedEventsErrors = response.data;
+
+                });
             },
 
             // show event hidden content (applies to both owned events and events attending)
