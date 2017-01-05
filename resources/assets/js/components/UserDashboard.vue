@@ -277,6 +277,9 @@
             showHiddenEventContent(event) {
                 console.log('Show hidden event content');
                 console.log(event.id);
+
+                //fetch users attending events
+                // display google maps plugin
             },
 
             createOwnedEvent() {
