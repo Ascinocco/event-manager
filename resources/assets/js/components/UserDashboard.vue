@@ -15,16 +15,48 @@
                         <br>
                     </div>
                     <div class="col-md-8 col-md-offset-2">
-                        <div class="panel panel-default">
+                        <div class="panel panel-default" v-for="ownedEvent in ownedEvents">
                             <div class="panel-heading">
-                                <h4 class="text-center">Title</h4>
+                                <h4 class="text-center">{{ ownedEvent.title }}</h4>
                             </div>
                             <div class="panel-body">
                                 <ul class="event-list-style">
-                                    <li class="list-space"><div>Description</div></li>
-                                    <li class="list-space">Location</li>
-                                    <li class="list-space">Attire</li>
-                                    <li class="list-space">Date</li>
+                                    <li class="list-space">
+                                        <div>
+                                            <div>
+                                                Description
+                                                <hr class="event-list-hr" style="width: 75px;">
+                                            </div>
+                                            {{ ownedEvent.description }}
+                                        </div>
+                                    </li>
+                                    <li class="list-space">
+                                        <div>
+                                            <div>
+                                                Location
+                                                <hr class="event-list-hr" style="width: 57px;">
+                                            </div>
+                                            {{ ownedEvent.location }}
+                                        </div>
+                                    </li>
+                                    <li class="list-space">
+                                        <div>
+                                            <div>
+                                                Attire
+                                                <hr class="event-list-hr" style="width: 35px;">
+                                            </div>
+                                            {{ ownedEvent.attire }}
+                                        </div>
+                                    </li>
+                                    <li class="list-space">
+                                        <div>
+                                            <div>
+                                                Date
+                                                <hr class="event-list-hr" style="width: 31px;">
+                                            </div>
+                                            {{ ownedEvent.date }}
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="panel-footer">
@@ -93,6 +125,12 @@
 
     .event-list-style {
         list-style-type: none;
+    }
+
+    .event-list-hr {
+        margin: 0px 0px 5px 0px;
+        padding: 0px 0px 0px 0px;
+        border-top: 1px solid #A9A9A9;
     }
 
 </style>
