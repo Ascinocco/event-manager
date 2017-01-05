@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Event;
+use Illuminate\Support\Facades\DB;
 
 class UserDashboardController extends Controller
 {
@@ -21,7 +22,7 @@ class UserDashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard.user.index');
+        return view('dashboard.user.vue');
     }
 
     /**
@@ -71,8 +72,10 @@ class UserDashboardController extends Controller
     public function getOwnedEvents()
     {
         $user_id = Auth::user()->id;
-        $events = Event::all()->where('owner', $user_id);
-        return response()->json($events);
+        $events = Event::where('owner', $user_id)->get();
+
+
+        return response()->json(["ownedEvents" => $events]);
     }
 
     /**
@@ -80,6 +83,13 @@ class UserDashboardController extends Controller
      */
     public function getAttendingEvents()
     {
+        $user_id = Auth::user()->id;
 
+        // gets array of event id's that the user is attending
+        $event_ids = DB::table('event_user')->where('user_id', $user_id)->pluck('event_id')->toArray();
+        // pull the events being attended by the user
+        $events = DB::table('events')->whereIn('id', $event_ids)->get();
+
+        return response()->json(["attendingEvents" => $events]);
     }
 }
