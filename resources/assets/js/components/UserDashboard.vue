@@ -168,7 +168,7 @@
                         </div>
                         <div class="panel-footer">
                             <div class="text-right">
-                                <button type="button" class="btn btn-default" v-on:click="createOwnedEvent(createEventForm)">Create</button>
+                                <button type="button" class="btn btn-default" v-on:click="createOwnedEvent(ownedEventForm)">Create</button>
                             </div>
                         </div>
                     </div>
@@ -241,6 +241,7 @@
                     attire: '',
                     date: '',
                 },
+                createOwnedEventErrors: [],
 
                 inviteUserToOwnedEvent: false,
 
@@ -332,7 +333,7 @@
                     console.log('Error deleting event');
                     console.log(response.data);
 
-                    this.ownedEventsErrors = response.data;
+                    this.createOwnedEventsErrors = response.data;
 
                 });
             },
@@ -354,8 +355,28 @@
                 this.createOwnedEventShowForm = true;
             },
 
-            createOwnedEvent() {
+            createOwnedEvent(event) {
+                console.log('creating event...');
+                this.$http.post('/user/createEvent', event).then(response => {
+                    // log success and data
+                    console.log('success creating event!');
+                    console.log(response.data);
 
+                    // refresh data
+                    this.fetchOwnedEvents();
+                    this.fetchAttendingEvents();
+
+                    // hide create owned event form
+                    this.createOwnedEventShowForm = false;
+
+                }, (response) => {
+                    // log error and data
+                    console.log('error creating event');
+                    console.log(response.data);
+
+                    this.createOwnedEventErrors = response.data;
+
+                });
             },
 
             inviteUserToOwnedEvent() {
