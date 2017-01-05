@@ -42,6 +42,27 @@
                 <div id="attendingEventsList" class="col-md-6">
                     <div class="text-center">
                         <h5>Events Attending</h5>
+                        <br>
+                    </div>
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="text-center">Title</h4>
+                            </div>
+                            <div class="panel-body">
+                                <ul class="event-list-style">
+                                    <li class="list-space"><div>Description</div></li>
+                                    <li class="list-space">Location</li>
+                                    <li class="list-space">Attire</li>
+                                    <li class="list-space">Date</li>
+                                </ul>
+                            </div>
+                            <div class="panel-footer">
+                                <div class="text-left">
+                                    <button type="button" class="btn btn-default"><i class="fa fa-plus fa-lg"></i></button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
