@@ -278,14 +278,14 @@
     export default {
         data() {
             return {
-
+                // html and form states
                 showEventLists: true,
-
-                // event the logged in user owns
-                ownedEvents: [],
-                ownedEventsErrors: [],
                 editOwnedEventShowForm: false,
-                editOwnedEventsErrors: [],
+                createOwnedEventShowForm: false,
+                inviteUserToOwnedEventShowForm: false,
+
+                // form objects
+                // edit form
                 editOwnedEventForm: {
                     id: '',
                     title: '',
@@ -295,7 +295,7 @@
                     date: '',
                 },
 
-                createOwnedEventShowForm: false,
+                // create event form
                 ownedEventForm: {
                     title: '',
                     description: '',
@@ -303,21 +303,28 @@
                     attire: '',
                     date: '',
                 },
-                createOwnedEventErrors: [],
 
-                inviteUserToOwnedEvent: false,
+                // invite user form
+                inviteUserForm: {
+                    eventId: '',
+                    invitedUserEmail: '',
+                },
 
-                // event the logged in user is attending
+                // event lists and invited users list
+                ownedEvents: [],
                 attendingEvents: [],
-                attendingEventsErrors: [],
-                viewAttendingEvent: false,
-
-                // users attending a specific event
                 usersAttendingEvent: {
                     eventId: '',
                     users: []
                 },
-                usersAttendingEventErrors: []
+
+                // error lists
+                ownedEventsErrors: [],
+                editOwnedEventsErrors: [],
+                createOwnedEventErrors: [],
+                attendingEventsErrors: [],
+                usersAttendingEventErrors: [],
+
             }
         },
 
