@@ -12,6 +12,31 @@
                 <div id="ownedEventsList" class="col-md-6">
                     <div class="text-center">
                         <h5>Events Owned | <a class="lara-anchor" v-on:click="createOwnedEvent()"><i class="fa fa-plus"></i></a></h5>
+                        <br>
+                    </div>
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="text-center">Title</h4>
+                            </div>
+                            <div class="panel-body">
+                                <ul class="event-list-style">
+                                    <li class="list-space"><div>Description</div></li>
+                                    <li class="list-space">Location</li>
+                                    <li class="list-space">Attire</li>
+                                    <li class="list-space">Date</li>
+                                </ul>
+                            </div>
+                            <div class="panel-footer">
+                                <div class="button-left">
+                                    <button type="button" class="btn btn-default"><i class="fa fa-plus fa-lg"></i></button>
+                                </div>
+                                <div class="text-right">
+                                    <button type="button" class="btn btn-default">Edit</button>
+                                    <button type="button" class="btn btn-danger">Delete</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div id="attendingEventsList" class="col-md-6">
@@ -31,6 +56,24 @@
     .lara-anchor:hover {
         color: #A9A9A9;
     }
+
+    .button-left {
+        float: left;
+    }
+
+    .button-right {
+        float: right;
+    }
+
+    .list-space {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .event-list-style {
+        list-style-type: none;
+    }
+
 </style>
 <script>
     export default {
