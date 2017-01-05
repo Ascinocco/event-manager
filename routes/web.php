@@ -63,9 +63,11 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('/dashboard', ['as' => 'dashboard', 'uses' => 'UserDashboardController@index']);
 
     Route::get('/getOwnedEvents', ['as' => 'getOwnedEvents', 'uses' => 'UserDashboardController@getOwnedEvents']);
+    Route::get('/getAttendingEvents', ['as' => 'getAttendingEvents', 'uses' => 'UserDashboardController@getAttendingEvents']);
+    Route::post('/getAttendingUsers', ['as' => 'getAttendingUsers', 'uses' => 'UserDashboardController@getAttendingUsers']);
 
-    Route::post('createEvent', ['as' => 'createEvent', 'uses' => 'UserDashboardController@createEvent']);
-
+    Route::post('/createEvent', ['as' => 'createEvent', 'uses' => 'UserDashboardController@createEvent']);
+    Route::delete('/deleteEvent/{id}', ['as' => 'deleteEvent', 'uses' => 'UserDashboardController@deleteEvent']);
 
 });
 

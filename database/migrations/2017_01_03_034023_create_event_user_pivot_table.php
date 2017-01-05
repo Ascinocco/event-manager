@@ -15,9 +15,9 @@ class CreateEventUserPivotTable extends Migration
     {
         Schema::create('event_user', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('event_id')->unsigned();
-            $table->foreign('event_id')->references('id')->on('events');
-            $table->integer('user_id')->references('id')->on('users');
+            $table->unsignedInteger('event_id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('owner_id');
             $table->timestamps();
         });
     }

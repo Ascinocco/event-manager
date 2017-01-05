@@ -1,5 +1,5 @@
-<html>
-<body>
+@extends('layouts.app')
+@section('content')
 <h1>User Dashboard!!!</h1>
 
 <button type="button" id="createEventShowFormButton" name="createEvent">Create Event</button>
@@ -149,5 +149,4 @@
 
     });
 </script>
-</body>
-</html>
+@endsection
