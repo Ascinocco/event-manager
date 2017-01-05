@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class AdminDashboardController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -13,16 +13,12 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        //
+        $this->middleware('auth');
+        $this->middleware('CheckAdmin');
     }
 
-    /**
-     * Show the home page
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function adminAction()
     {
-        return view('welcome');
+        return '<h1>Authorized!</h1>';
     }
 }
