@@ -65,6 +65,7 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('/getAttendingUsers', ['as' => 'getAttendingUsers', 'uses' => 'UserDashboardController@getAttendingUsers']);
 
     Route::post('/createEvent', ['as' => 'createEvent', 'uses' => 'UserDashboardController@createEvent']);
+    Route::put('/updateEvent', ['as' => 'updateEvent', 'uses' => 'UserDashboardController@updateEvent']);
     Route::delete('/deleteEvent/{id}', ['as' => 'deleteEvent', 'uses' => 'UserDashboardController@deleteEvent']);
 
 });

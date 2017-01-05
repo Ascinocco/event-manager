@@ -2,12 +2,21 @@
     <div>
         <div id="userDashboard" class="container">
             <div class="row">
-                <div class="text-center">
-                    <h3>Dashboard</h3>
+                <div v-if="showEventLists === false">
+                    <div>
+                        <a class="lara-anchor" style="float: left;" v-on:click="back()"><i class="fa fa-arrow-left"></i></a>
+                        <h3 class="col-md-4 col-md-offset-5">&nbsp;&nbsp;Dashboard</h3>
+                    </div>
+                </div>
+
+                <div v-if="showEventLists === true">
+                    <div class="text-center">
+                        <h3>Dashboard</h3>
+                    </div>
                 </div>
             </div>
 
-            <div class="row" v-if="createOwnedEventShowForm !== true">
+            <div class="row" v-if="showEventLists === true">
                 <br>
                 <div id="ownedEventsList" class="col-md-6">
                     <div class="text-center">
@@ -130,7 +139,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row" v-else="createOwnedEventShowForm === true">
+            <div class="row" v-if="createOwnedEventShowForm === true">
                 <br>
                 <div id="createOwnedEvent" class="col-md-4 col-md-offset-4">
                     <div class="panel panel-default">
@@ -169,6 +178,50 @@
                         <div class="panel-footer">
                             <div class="text-right">
                                 <button type="button" class="btn btn-default" v-on:click="createOwnedEvent(ownedEventForm)">Create</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" v-if="editOwnedEventShowForm === true">
+                <br>
+                <div id="editOwnedEvent" class="col-md-4 col-md-offset-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="text-center">
+                                <h4>Edit Event</h4>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="editTitle" class="form-label-no-bottom-padding">Title </label>
+                                <hr class="create-event-form-hr" style="width: 31px;">
+                                <input type="text" id="editTitle" name="title" class="form-control" v-model="editOwnedEventForm.title" required="required">
+                            </div>
+                            <div class="form-group">
+                                <label for="editDescription" class="form-label-no-bottom-padding">Description </label>
+                                <hr class="create-event-form-hr" style="width: 75px;">
+                                <textarea type="text" id="editDescription" name="description" class="form-control" rows="6" v-model="editOwnedEventForm.description" required="required"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="editLocation" class="form-label-no-bottom-padding">Location </label>
+                                <hr class="create-event-form-hr" style="width: 57px;">
+                                <input type="text" id="editLocation" name="location" class="form-control" v-model="editOwnedEventForm.location" required="required">
+                            </div>
+                            <div class="form-group">
+                                <label for="editAttire" class="form-label-no-bottom-padding">Attire </label>
+                                <hr class="create-event-form-hr" style="width: 35px;">
+                                <input type="text" id="editAttire" name="attire" class="form-control" v-model="editOwnedEventForm.attire" required="required">
+                            </div>
+                            <div class="form-group">
+                                <label for="editDate" class="form-label-no-bottom-padding">Date </label>
+                                <hr class="create-event-form-hr" style="width: 31px;">
+                                <input type="date" id="editDate" name="date" class="form-control" v-model="editOwnedEventForm.date" required="required">
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="text-right">
+                                <button type="button" class="btn btn-default" v-on:click="updateOwnedEvent(editOwnedEventForm)">Update</button>
                             </div>
                         </div>
                     </div>
@@ -226,13 +279,22 @@
         data() {
             return {
 
+                showEventLists: true,
+
                 // event the logged in user owns
                 ownedEvents: [],
                 ownedEventsErrors: [],
-                editOwnedEvent: {
-                    edit: false,
-                    eventId: '',
+                editOwnedEventShowForm: false,
+                editOwnedEventsErrors: [],
+                editOwnedEventForm: {
+                    id: '',
+                    title: '',
+                    description: '',
+                    location: '',
+                    attire: '',
+                    date: '',
                 },
+
                 createOwnedEventShowForm: false,
                 ownedEventForm: {
                     title: '',
@@ -308,12 +370,37 @@
                 });
             },
 
-            showOwnedEventEditForm(ownedEvent) {
+            showOwnedEventEditForm(event) {
                 console.log('show owned event edit form');
-                console.log(ownedEvent.id);
-            },
-            updateOwnedEvent() {
 
+                console.log(event);
+                this.showEventLists = false;
+                this.editOwnedEventShowForm = true;
+                this.editOwnedEventForm.id = event.id;
+                this.editOwnedEventForm.title = event.title;
+                this.editOwnedEventForm.description = event.description;
+                this.editOwnedEventForm.location = event.location;
+                this.editOwnedEventForm.attire = event.attire;
+                this.editOwnedEventForm.date = event.date;
+            },
+            updateOwnedEvent(event) {
+                this.$http.put('/user/updateEvent', event).then(response => {
+                    console.log('Event updated!');
+                    console.log(response.data);
+
+                    this.fetchOwnedEvents();
+                    this.fetchAttendingEvents();
+
+                    this.back();
+
+                }, (response) => {
+                    console.log('Event update failed...');
+                    console.log(response.data);
+
+                    this.editOwnedEventsErrors = response.data;
+                    this.back();
+
+                });
             },
 
             deleteOwnedEvent(ownedEvent) {
@@ -351,6 +438,10 @@
             showCreateOwnedEventForm() {
                 // log that we are creating an event
                 console.log('Showing create event form');
+
+                // hide lists
+                this.showEventLists = false;
+
                 // show create event form
                 this.createOwnedEventShowForm = true;
             },
@@ -366,8 +457,8 @@
                     this.fetchOwnedEvents();
                     this.fetchAttendingEvents();
 
-                    // hide create owned event form
-                    this.createOwnedEventShowForm = false;
+                    // back to main dashboard
+                    this.back();
 
                 }, (response) => {
                     // log error and data
@@ -375,6 +466,8 @@
                     console.log(response.data);
 
                     this.createOwnedEventErrors = response.data;
+
+                    this.back();
 
                 });
             },
@@ -389,6 +482,13 @@
 
             refreshEvents() {
 
+            },
+
+            back() {
+                 // pretend back button functionality ahah
+                 this.createOwnedEventShowForm = false;
+                 this.editOwnedEventShowForm = false;
+                 this.showEventLists = true;
             },
         },
 

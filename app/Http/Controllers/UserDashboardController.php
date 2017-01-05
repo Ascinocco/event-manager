@@ -67,6 +67,49 @@ class UserDashboardController extends Controller
     }
 
     /**
+     * Update event
+     */
+    public function updateEvent(Request $request)
+    {
+        // validate event data
+        $this->validate($request, [
+            'title'         => 'name|required|max:255',
+            'description'   => 'required',
+            'location'      => 'required',
+            'attire'        => 'required',
+            'date'          => 'date',
+        ]);
+
+        // get event
+        $event_id = $request->input('id');
+        $event = Event::find($event_id);
+
+        // update event
+        $event->title       = $request->input('title');
+        $event->description = $request->input('description');
+        $event->location    = $request->input('location');
+        $event->attire      = $request->input('attire');
+        $event->date        = $request->input('date');
+        $event->owner       = Auth::user()->id;
+
+        if ($event->save()) {
+            return response()->json(
+                [
+                    "success" => true,
+                    "msg" => "Event Successfully Updated"
+                ]
+            );
+        } else {
+            return response()->json(
+                [
+                    "success" => false,
+                    "msg" => "Event Update Failed"
+                ]
+            );
+        }
+    }
+
+    /**
      * Get events user owns
      */
     public function getOwnedEvents()
