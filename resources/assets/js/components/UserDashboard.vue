@@ -33,7 +33,7 @@
                                 </div>
                                 <div class="text-right">
                                     <button type="button" class="btn btn-default">Edit</button>
-                                    <button type="button" class="btn btn-danger">Delete</button>
+                                    <button type="button" class="btn btn-default">Delete</button>
                                 </div>
                             </div>
                         </div>
