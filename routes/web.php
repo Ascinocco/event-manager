@@ -64,6 +64,7 @@ Route::group(['prefix' => 'user'], function () {
 
     Route::get('/getOwnedEvents', ['as' => 'getOwnedEvents', 'uses' => 'UserDashboardController@getOwnedEvents']);
     Route::get('/getAttendingEvents', ['as' => 'getAttendingEvents', 'uses' => 'UserDashboardController@getAttendingEvents']);
+    Route::get('/getAttendingUsers', ['as' => 'getAttendingUsers', 'uses' => 'UserDashboardController@getAttendingUsers']);
 
     Route::post('createEvent', ['as' => 'createEvent', 'uses' => 'UserDashboardController@createEvent']);
 

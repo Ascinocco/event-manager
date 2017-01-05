@@ -73,8 +73,6 @@ class UserDashboardController extends Controller
     {
         $user_id = Auth::user()->id;
         $events = Event::where('owner', $user_id)->get();
-
-
         return response()->json(["ownedEvents" => $events]);
     }
 
@@ -91,5 +89,13 @@ class UserDashboardController extends Controller
         $events = DB::table('events')->whereIn('id', $event_ids)->get();
 
         return response()->json(["attendingEvents" => $events]);
+    }
+
+    /**
+     * Get users attending the passed in event
+     */
+    public function getAttendingUsers(Request $request)
+    {
+
     }
 }
