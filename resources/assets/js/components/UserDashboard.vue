@@ -307,7 +307,7 @@
                 // invite user form
                 inviteUserForm: {
                     eventId: '',
-                    invitedUserEmail: '',
+                    invitedUsersEmails: [],
                 },
 
                 // event lists and invited users list
@@ -377,6 +377,15 @@
                 });
             },
 
+            showCreateOwnedEventForm() {
+                // log that we are creating an event
+                console.log('Showing create event form');
+                // hide lists
+                this.showEventLists = false;
+                // show create event form
+                this.createOwnedEventShowForm = true;
+            },
+
             showOwnedEventEditForm(event) {
                 console.log('show owned event edit form');
 
@@ -390,13 +399,38 @@
                 this.editOwnedEventForm.attire = event.attire;
                 this.editOwnedEventForm.date = event.date;
             },
+
+            createOwnedEvent(event) {
+                console.log('creating event...');
+                this.$http.post('/user/createEvent', event).then(response => {
+                    // log success and data
+                    console.log('success creating event!');
+                    console.log(response.data);
+
+                    // refresh data
+                    this.refreshEvents();
+
+                    // back to main dashboard
+                    this.back();
+
+                }, (response) => {
+                    // log error and data
+                    console.log('error creating event');
+                    console.log(response.data);
+
+                    this.createOwnedEventErrors = response.data;
+                    this.refreshEvents();
+                    this.back();
+
+                });
+            },
+
             updateOwnedEvent(event) {
                 this.$http.put('/user/updateEvent', event).then(response => {
                     console.log('Event updated!');
                     console.log(response.data);
 
-                    this.fetchOwnedEvents();
-                    this.fetchAttendingEvents();
+                    this.refreshEvents();
 
                     this.back();
 
@@ -405,6 +439,7 @@
                     console.log(response.data);
 
                     this.editOwnedEventsErrors = response.data;
+                    this.refreshEvents();
                     this.back();
 
                 });
@@ -419,8 +454,7 @@
                     console.log(response.data);
 
                     // grab events again and refresh
-                    this.fetchOwnedEvents();
-                    this.fetchAttendingEvents();
+                    this.refreshEvents();
 
                 }, (response) => {
 
@@ -428,6 +462,9 @@
                     console.log(response.data);
 
                     this.createOwnedEventsErrors = response.data;
+
+                    // grab events again and refresh
+                    this.refreshEvents();
 
                 });
             },
@@ -441,54 +478,13 @@
                 // display google maps plugin
             },
 
-
-            showCreateOwnedEventForm() {
-                // log that we are creating an event
-                console.log('Showing create event form');
-
-                // hide lists
-                this.showEventLists = false;
-
-                // show create event form
-                this.createOwnedEventShowForm = true;
-            },
-
-            createOwnedEvent(event) {
-                console.log('creating event...');
-                this.$http.post('/user/createEvent', event).then(response => {
-                    // log success and data
-                    console.log('success creating event!');
-                    console.log(response.data);
-
-                    // refresh data
-                    this.fetchOwnedEvents();
-                    this.fetchAttendingEvents();
-
-                    // back to main dashboard
-                    this.back();
-
-                }, (response) => {
-                    // log error and data
-                    console.log('error creating event');
-                    console.log(response.data);
-
-                    this.createOwnedEventErrors = response.data;
-
-                    this.back();
-
-                });
-            },
-
-            inviteUserToOwnedEvent() {
-
-            },
-
-            viewAttendingEvent() {
+            inviteUsersToOwnedEvent() {
 
             },
 
             refreshEvents() {
-
+                this.fetchOwnedEvents();
+                this.fetchAttendingEvents();
             },
 
             back() {
