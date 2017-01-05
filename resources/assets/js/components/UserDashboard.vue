@@ -77,21 +77,53 @@
                         <br>
                     </div>
                     <div class="col-md-8 col-md-offset-2">
-                        <div class="panel panel-default">
+                        <div class="panel panel-default" v-for="attendingEvent in attendingEvents">
                             <div class="panel-heading">
-                                <h4 class="text-center">Title</h4>
+                                <h4 class="text-center">{{ attendingEvent.title }}</h4>
                             </div>
                             <div class="panel-body">
                                 <ul class="event-list-style">
-                                    <li class="list-space"><div>Description</div></li>
-                                    <li class="list-space">Location</li>
-                                    <li class="list-space">Attire</li>
-                                    <li class="list-space">Date</li>
+                                    <li class="list-space">
+                                        <div>
+                                            <div>
+                                                Description
+                                                <hr class="event-list-hr" style="width: 75px;">
+                                            </div>
+                                            {{ attendingEvent.description }}
+                                        </div>
+                                    </li>
+                                    <li class="list-space">
+                                        <div>
+                                            <div>
+                                                Location
+                                                <hr class="event-list-hr" style="width: 57px;">
+                                            </div>
+                                            {{ attendingEvent.location }}
+                                        </div>
+                                    </li>
+                                    <li class="list-space">
+                                        <div>
+                                            <div>
+                                                Attire
+                                                <hr class="event-list-hr" style="width: 35px;">
+                                            </div>
+                                            {{ attendingEvent.attire }}
+                                        </div>
+                                    </li>
+                                    <li class="list-space">
+                                        <div>
+                                            <div>
+                                                Date
+                                                <hr class="event-list-hr" style="width: 31px;">
+                                            </div>
+                                            {{ attendingEvent.date }}
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="panel-footer">
                                 <div class="text-left">
-                                    <button type="button" class="btn btn-default"><i class="fa fa-plus fa-lg"></i></button>
+                                    <button type="button" class="btn btn-default" v-on:click="showHiddenEventContent(ownedEvent)"><i class="fa fa-plus fa-lg"></i></button>
                                 </div>
                             </div>
                         </div>
