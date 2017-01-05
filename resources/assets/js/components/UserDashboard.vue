@@ -61,11 +61,11 @@
                             </div>
                             <div class="panel-footer">
                                 <div class="button-left">
-                                    <button type="button" class="btn btn-default"><i class="fa fa-plus fa-lg"></i></button>
+                                    <button type="button" class="btn btn-default" v-on:click="showHiddenEventContent(ownedEvent)"><i class="fa fa-plus fa-lg"></i></button>
                                 </div>
                                 <div class="text-right">
-                                    <button type="button" class="btn btn-default">Edit</button>
-                                    <button type="button" class="btn btn-default">Delete</button>
+                                    <button type="button" class="btn btn-default" v-on:click="showOwnedEventEditForm(ownedEvent)">Edit</button>
+                                    <button type="button" class="btn btn-default" v-on:click="deleteOwnedEvent(ownedEvent)">Delete</button>
                                 </div>
                             </div>
                         </div>
@@ -211,12 +211,23 @@
                 });
             },
 
+            showOwnedEventEditForm(ownedEvent) {
+                console.log('show owned event edit form');
+                console.log(ownedEvent.id);
+            },
             updateOwnedEvent() {
 
             },
 
-            deleteOwnedEvent() {
+            deleteOwnedEvent(ownedEvent) {
+                console.log('delete owned event');
+                console.log(ownedEvent.id);
+            },
 
+            // show event hidden content (applies to both owned events and events attending)
+            showHiddenEventContent(event) {
+                console.log('Show hidden event content');
+                console.log(event.id);
             },
 
             createOwnedEvent() {
