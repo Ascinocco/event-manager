@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="homestead@127.0.0.1" uuid="687c651c-09e9-499c-863d-274e44c6be32">
+    <data-source source="LOCAL" name="event-manager@localhost" uuid="f47b53a7-2248-4700-9da5-8d8ade51dd4f">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
-      <configured-by-url>true</configured-by-url>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://127.0.0.1:33060/homestead</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:33060/event-manager</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="convertToNull" />
