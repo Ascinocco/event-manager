@@ -13,8 +13,14 @@ export default class UserSettings {
                 dataType: "json",
                 url:  "/user/settings",
                 data: data,
-                success: this.displaySuccess(),
-                error: this.displayErrors()
+                success: function (message) {
+                  console.log('success');
+                  console.log(message);
+                },
+                error: function (error) {
+                    console.log('error')
+                    console.log(error)
+                }
             });
         } else {
             // need to figure out a good way to output errors
@@ -23,14 +29,7 @@ export default class UserSettings {
     }
 
     validateSettings() {
-        console.log('validate')
-    }
-
-    displaySuccess(messages) {
-        console.log('success')
-    }
-
-    displayErrors(messages) {
-        console.log('error')
+        console.log('validate');
+        return true;
     }
 }

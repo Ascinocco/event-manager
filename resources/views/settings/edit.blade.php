@@ -5,7 +5,9 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-2">
                 <div class="panel panel-default">
-                    <form id="settingsForm">
+                    <form id="settingsForm" method="POST" action="{{ url('/user/settings') }}">
+                        {{ method_field('PUT') }}
+                        {{ csrf_field() }}
                         <div class="panel-heading text-center">
                             <h3>{{ $user->name }}'s Settings</h3>
                         </div>
@@ -30,7 +32,7 @@
                             </div>
                         </div>
                         <div class="panel-footer text-right">
-                            <input type="button" class="btn btn-default" value="Update">
+                            <input type="submit" class="btn btn-default" value="Update">
                         </div>
                     </form>
                 </div>

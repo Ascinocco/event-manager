@@ -12035,8 +12035,14 @@ var UserSettings = function () {
                     dataType: "json",
                     url: "/user/settings",
                     data: data,
-                    success: this.displaySuccess(),
-                    error: this.displayErrors()
+                    success: function success(message) {
+                        console.log('success');
+                        console.log(message);
+                    },
+                    error: function error(_error) {
+                        console.log('error');
+                        console.log(_error);
+                    }
                 });
             } else {
                 // need to figure out a good way to output errors
@@ -12047,16 +12053,7 @@ var UserSettings = function () {
         key: "validateSettings",
         value: function validateSettings() {
             console.log('validate');
-        }
-    }, {
-        key: "displaySuccess",
-        value: function displaySuccess(messages) {
-            console.log('success');
-        }
-    }, {
-        key: "displayErrors",
-        value: function displayErrors(messages) {
-            console.log('error');
+            return true;
         }
     }]);
 
