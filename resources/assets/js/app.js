@@ -1,4 +1,5 @@
 require('./bootstrap');
 
-// settings module
-require('./UserSettings/UserSettings.js');
+require('./UserSettings/UserSettingsController.js');
+
+

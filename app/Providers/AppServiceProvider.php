@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,22 +31,22 @@ class AppServiceProvider extends ServiceProvider
          * Used for role validation
          * Probably needed later...
          */
-        Validator:extend('valid_role', function($value) {
-            $roles = [
-                'USER',
-                'ADMIN'
-            ];
-
-            foreach ($roles as $role)
-            {
-                if ($role === $value)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        });
+//        Validator:extend('valid_role', function($value) {
+//            $roles = [
+//                'USER',
+//                'ADMIN'
+//            ];
+//
+//            foreach ($roles as $role)
+//            {
+//                if ($role === $value)
+//                {
+//                    return true;
+//                }
+//            }
+//
+//            return false;
+//        });
     }
 
     /**
