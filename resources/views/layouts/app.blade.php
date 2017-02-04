@@ -36,7 +36,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        Event Manager
                     </a>
                 </div>
 
@@ -59,6 +59,12 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{ url('/user/dashboard') }}">Dashboard</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('/user/settings') }}">Settings</a>
+                                    </li>
                                     <li>
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();

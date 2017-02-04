@@ -9,6 +9,11 @@ window._ = require('lodash');
 
 window.$ = window.jQuery = require('jquery');
 
+window.headers = {
+    'X-CSRF-TOKEN': window.Laravel.csrfToken,
+    'X-Requested-With': 'XMLHttpRequest'
+};
+
 require('bootstrap-sass');
 
 /**
