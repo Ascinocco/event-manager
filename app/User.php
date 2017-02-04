@@ -26,11 +26,4 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    // update user name method
-
-    // update password method
-
-    // update email method
-
 }
